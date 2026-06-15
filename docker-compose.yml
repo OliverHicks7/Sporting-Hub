@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: sports_hub_db
+    restart: always
+    environment:
+      POSTGRES_USER: sportsuser
+      POSTGRES_PASSWORD: sportspassword
+      POSTGRES_DB: sportshub
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
