@@ -10,8 +10,8 @@ def health():
 @app.get("/db-check")
 def db_check():
     try:
-        conn = engine.connect()
-        conn.close()
-        return {"db": "connected"}
+        with engine.connect() as conn:
+            result = conn.execute(text("SELECT 1"))
+            return {"db": "connected", "result": result.scalar()}
     except Exception as e:
         return {"db": "failed", "error": str(e)}
