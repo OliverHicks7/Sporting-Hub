@@ -31,3 +31,7 @@ def create_user(username: str, favourite_sport: str, db: Session = Depends(get_d
     db.commit()
     db.refresh(user)
     return user
+
+@app.get("/users")
+def get_users(db: Session = Depends(get_db)):
+    return db.query(User).all()
